@@ -1,0 +1,15 @@
+.cp {
+    cursor: pointer;
+}
+
+#Login, #Reg {
+    margin-top: 10%;
+}
+
+.custom-input input {
+    width: 300px;
+}
+
+.del-space {
+    margin-right: -3px;
+}

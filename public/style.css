@@ -1,5 +1,6 @@
 .cp {
     cursor: pointer;
+    user-select: none;
 }
 
 #Login, #Reg {
@@ -12,4 +13,31 @@
 
 .del-space {
     margin-right: -3px;
+}
+
+a.profile-link {
+    text-decoration: none;
+    color: #7b8ab8;
+}
+
+.profile-link::before {
+    content: "@";
+}
+
+form#addpost {
+    display: none;
+    top: 7%;
+    left: 55%;
+    width: 400px;
+    border-radius: 10px;
+    padding: 20px;
+    position: absolute;
+    z-index: 9999;
+    background:  #e4ebf5;
+    box-shadow: 2px 2px 6px rgb(55 94 148 / 40%);
+}
+
+.sendcomment {
+    background-color: #e4ebf5;
+    padding: 20px;
 }

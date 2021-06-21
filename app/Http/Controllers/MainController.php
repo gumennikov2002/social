@@ -16,6 +16,7 @@ class MainController extends Controller
         $uid = session('LoggedUser');
         // $post = DB::table('posts')->orderBy('id', 'desc')->get();
         $post = DB::table('posts')->join('users', 'user_id', '=', 'users.id')->select('posts.*', 'users.name')->orderBy('posts.id', 'desc')->get();
+
         $data 
         =[
             'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first(),
@@ -80,7 +81,8 @@ class MainController extends Controller
             if(Hash::check($request->password, $userInfo->password))
             {
                 $request->session()->put('LoggedUser', $userInfo->id);
-                return redirect('profile');
+                $uid = $userInfo->id;
+                return redirect("profile/$uid");
             }
             else
             {
@@ -89,10 +91,11 @@ class MainController extends Controller
         }
     }
 
-    function profile()
+    function profile($uid)
     {
-        $uid = session('LoggedUser');
-        $post = DB::table('posts')->where('user_id', '=', $uid)->orderBy('id', 'desc')->get();
+        // $uid = session('LoggedUser');
+        // $post = DB::table('posts')->join('users', 'user_id', '=', 'users.id')->where('user_id', '=', $uid)->orderBy('id', 'desc')->get();
+        $post = DB::table('posts')->join('users', 'user_id', '=', 'users.id')->select('posts.*', 'users.name')->where('posts.user_id', '=', $uid)->orderBy('posts.id', 'desc')->get();
         $count_posts =DB::table('posts')->where('user_id', '=', $uid)->count();
         $users_info = DB::table('users')->get();
         $data 
@@ -101,14 +104,7 @@ class MainController extends Controller
             'post' => $post
         ];
 
-        if($count_posts == 0)
-        {
-            return view('profile', $data);
-        }
-        else
-        {
-            return view('profile', $data);
-        }
+        return view('profile', $data);
     }
 
     function logout()

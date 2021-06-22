@@ -11,27 +11,27 @@
             <span>{{ $row->created_at }}</span>
         </div>
         <div class="card-body">
-          <h4 class="card-title">{{ $row->title }}</h4>
-          <p class="card-text">{{ $row->text }}</p>
+            <h4 class="card-title">{{ $row->title }}</h4>
+            <p class="card-text">{{ $row->text }}</p>
         </div>
         @if($row->user_id == session('LoggedUser'))
         <div class="d-flex justify-content-between">
             <div class="card-footer d-flex justify-content-start nav-link cp">
-            <a href="/profile/delpost/{{ $row->id }}" class="btn btn-outline-danger">Удалить</a>
+                <a href="/profile/delpost/{{ $row->id }}" class="btn btn-outline-danger">Удалить</a>
             </div>
             <div class="card-footer d-flex justify-content-end nav-link cp">
-                    <a href="/post/{{ $row->id }}" class="btn btn-outline-success">Подробнее</a>
+                <a href="/post/{{ $row->id }}" class="btn btn-outline-success">Подробнее</a>
             </div>
         </div>
         @else
         <div class="d-flex justify-content-end">
             <div class="card-footer d-flex justify-content-end nav-link cp">
-                    <a href="/post/{{ $row->id }}" class="btn btn-outline-success">Подробнее</a>
+                <a href="/post/{{ $row->id }}" class="btn btn-outline-success">Подробнее</a>
             </div>
         </div>
         @endif
-      </div>
-      <!-- Конец карточки -->
-        @endforeach
+    </div>
+    <!-- Конец карточки -->
+    @endforeach
 </div>
 @endsection

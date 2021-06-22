@@ -52,12 +52,14 @@ class PostController extends Controller
         $uid = session('LoggedUser');
         $postinfo = DB::table('posts')->join('users', 'posts.user_id', '=', 'users.id')->select('posts.id', 'users.name', 'posts.user_id', 'posts.title', 'posts.text', 'posts.created_at')->where('posts.id', '=', $id)->get();
         $comments = DB::table('comments')->join('users', 'comments.author_id', '=', 'users.id')->select('comments.id', 'comments.post_id', 'comments.author_id', 'comments.reply_id', 'comments.created_at', 'comments.text', 'users.name' )->where('post_id', '=', $id)->orderBy('id', 'desc')->get();
+        $count_comments = DB::table('comments')->where('post_id', '=', $id)->count();
         $data
         =
         [
             'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first(),
             'postinfo' => $postinfo[0],
-            'comments' => $comments
+            'comments' => $comments,
+            'count_comments' => $count_comments
         ];
         // dd($postinfo[0]);
         return view('post', $data);

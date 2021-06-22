@@ -2,7 +2,7 @@
 @section('title', 'Профиль')
 @section('content')
 
-<div class="container mt-3 mb-5">
+<div class="container mt-5 mb-5">
     <!-- Начало карточки -->
     <div class="alert alert-dismissible alert-light mb-3" style="max-width: 100rem; min-height: 300px;">
         <div class="card-header d-flex justify-content-between">
@@ -15,7 +15,7 @@
         </div>
     </div>
     <!-- Конец карточки -->
-    <h4>Комментарии ({{ $count_comments }}) </h4>
+    <h4 class="mt-5">Комментарии ({{ $count_comments }}) </h4>
     @if(session('LoggedUser'))
     <form action="/post/addcomment/{{ $postinfo->id }}" method="POST"
         class="mt-2 mb-2 sendcomment alert alert-dismissible alert-light">
@@ -29,20 +29,6 @@
     @endif
 
     @foreach($comments as $comment)
-
-    <div id="replyform" class="mt-3" style="display:none;">
-        <form action="/post/addreply/{{ $comment->id }}" method="POST"
-            class="mt-2 mb-2 sendcomment alert alert-dismissible alert-secondary">
-            @csrf
-            <textarea type="text" class="form-control" placeholder="Текст вашего комментария" name="text"></textarea>
-            <input type="text" value="{{ $postinfo->id }}" style="display:none;" name="post_id">
-            <div class="d-flex justify-content-between mt-2">
-                <span class="pt-3">Ответ на комментарий пользователя <span
-                        class="profile-link">{{ $comment->name }}</span></span>
-                <input type="submit" class="btn btn-outline-success" value="Отправить">
-            </div>
-        </form>
-    </div>
 
     <div class="alert alert-dismissible alert-light mt-3 mb-3" style="max-width: 100rem;">
         @if($comment -> reply_id != NULL)
@@ -65,19 +51,19 @@
         @if( $comment->author_id == session('LoggedUser') )
         <div class="card-footer d-flex justify-content-between">
             <a href="/post/delcomment/{{ $comment->id }}">Удалить</a>
-            <a class="cp" onclick="showHide('replyform')">Ответить</a>
+            <a class="cp">Ответить</a>
         </div>
         @elseif(session('LoggedUser'))
         <div class="card-footer d-flex justify-content-end">
-            <a class="cp" onclick="showHide('replyform')">Ответить</a>
+            <a class="cp">Ответить</a>
         </div>
         @endif
     </div>
     @endforeach
     @if($count_comments > 5)
-    <div class="alert alert-dismissible alert-success text-white text-center cp">
+    <!-- <div class="alert alert-dismissible alert-success text-white text-center cp">
         Загрузить еще комментарии
-    </div>
+    </div> -->
     @endif
 </div>
 @endsection

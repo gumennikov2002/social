@@ -4,9 +4,9 @@
 
 
 <div class="container mt-4 mb-4">
-    <h3 class="mb-3">
-        Посты
-    </h3>
+    <div class="d-flex mb-3">
+        <h3>Посты</h3>
+    </div>
     @if(Session::get('fail'))
     <div class="alert alert-danger mt-3" style="width:300px">
         <span class="text-white">{{ Session::get('fail') }}</span>

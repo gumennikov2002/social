@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\BooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::group(['middleware'=>['AuthCheck']], function()
     Route::post('/post/addcomment/{pid}', [PostController::class, 'addcomment'])->name('addcomment');
     Route::post('/post/addreply/{cid}', [PostController::class, 'addreply'])->name('addreply');
     Route::get('/post/delcomment/{id}', [PostController::class, 'delcomment'])->name('delcomment');
-
+    Route::get('/library', [BooksController::class, 'library'])->name('library');
     // Route::get('/profile', [PostController::class, 'profile'])->name('loadposts');
     Route::get('/auth', [MainController::class, 'login'])->name('login');
     Route::get('/auth', [MainController::class, 'reg'])->name('reg');

@@ -29,9 +29,11 @@
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
+                    @if(session('LoggedUser'))
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Книги</a>
+                        <a class="nav-link" href="#">Библиотека</a>
                     </li>
+                    @endif
                 </ul>
                 @if(session('LoggedUser'))
                 <a href="/profile/{{ $LoggedUserInfo['id'] }}"

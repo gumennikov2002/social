@@ -41,3 +41,42 @@ form#addpost {
     background-color: #e4ebf5;
     padding: 20px;
 }
+
+.fwb {
+    font-weight: bold;
+}
+
+.lib-span span {
+    margin-right: 25px;
+    font-size: 18px;
+}
+
+.books-text {
+    overflow: hidden;
+    height: 100px
+}
+
+input.edit-control-year {
+    width: 60px;
+    height: 20px;
+    padding: 10px;
+}
+
+input.edit-control-title {
+    padding: 10px;
+}
+
+.readmode {
+    background: #fff;
+    font-family: 'Times New Roman';
+}
+
+.readmode h1 {
+    font-weight: bold;
+    color: #000;
+}
+
+.readmode span {
+    font-size: 24px;
+    color: #000;
+}

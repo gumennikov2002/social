@@ -34,6 +34,11 @@ Route::group(['middleware'=>['AuthCheck']], function()
     Route::post('/post/addreply/{cid}', [PostController::class, 'addreply'])->name('addreply');
     Route::get('/post/delcomment/{id}', [PostController::class, 'delcomment'])->name('delcomment');
     Route::get('/library', [BooksController::class, 'library'])->name('library');
+    Route::post('/library/addbook', [BooksController::class, 'addbook'])->name('addbook');
+    Route::get('/library/removebook/{id}', [BooksController::class, 'removebook'])->name('removebook');
+    Route::get('/library/editbook/{id}', [BooksController::class, 'editbook'])->name('editbook');
+    Route::post('/library/updatebook/{id}', [BooksController::class, 'updatebook'])->name('updatebook');
+    Route::get('/library/read/{id}', [BooksController::class, 'read'])->name('read');
     // Route::get('/profile', [PostController::class, 'profile'])->name('loadposts');
     Route::get('/auth', [MainController::class, 'login'])->name('login');
     Route::get('/auth', [MainController::class, 'reg'])->name('reg');

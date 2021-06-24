@@ -73,12 +73,12 @@ input.edit-control-title {
 
 .light-theme h1 {
     font-weight: bold;
-    color: #000;
+    color: rgb(37, 37, 37);
 }
 
 .light-theme span {
     font-size: 24px;
-    color: #000;
+    color: rgb(37, 37, 37);
 }
 
 .black-theme {

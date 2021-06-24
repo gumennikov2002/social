@@ -66,17 +66,36 @@ input.edit-control-title {
     padding: 10px;
 }
 
-.readmode {
+.light-theme {
     background: #fff;
     font-family: 'Times New Roman';
 }
 
-.readmode h1 {
+.light-theme h1 {
     font-weight: bold;
     color: #000;
 }
 
-.readmode span {
+.light-theme span {
     font-size: 24px;
     color: #000;
+}
+
+.black-theme {
+    background: #000;
+    font-family: 'Times New Roman';
+}
+
+.black-theme h1 {
+    font-weight: bold;
+    color: rgb(204, 204, 204);
+}
+
+.black-theme span {
+    font-size: 24px;
+    color: rgb(204, 204, 204);
+}
+
+#changeTheme {
+    font-size: 18px;
 }

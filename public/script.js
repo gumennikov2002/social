@@ -5,6 +5,18 @@ function showHide(id){
     else elem.style.display=''; 
 }
 
+function changeTheme(){
+    elem = document.getElementById('body');
+    
+    if(elem.classList.contains("light-theme")) {
+        elem.classList.remove("light-theme");
+        elem.classList.add('black-theme');
+    } else {
+        elem.classList.remove('black-theme');
+        elem.classList.add("light-theme");
+    }
+}
+
 function showRegForm() {
     Reg = document.getElementById('Reg');
     Login = document.getElementById('Login');

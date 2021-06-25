@@ -37,9 +37,9 @@
 
 
 
-<div id="OtherLibPage" style="display:none;" class="mt-3">    
+<div id="OtherLibPage" style="display:none;" class="mt-3">
     <div class="container mt-2 d-flex flex-wrap">
-    @foreach($othlib as $o)
+        @foreach($othlib as $o)
         <div class="card border-success" style="max-width: 20rem; margin-right:25px; margin-bottom: 25px;">
             <div class="card-header d-flex justify-content-between">
                 <a href="{{ $o->author_id }}" class="profile-link">{{ $o->name }}</a>
@@ -53,7 +53,7 @@
                 <a href="/library/read/{{ $o->id }}">Прочитать</a>
             </div>
         </div>
-    @endforeach
+        @endforeach
     </div>
 </div>
 
@@ -77,7 +77,7 @@
     <div class="container">
         <h4>Настройки доступа библиотеки</h4>
         <form action="/library/giveaccess/{{ $library->id }}" method="POST" class="d-flex">
-        @csrf
+            @csrf
             <input type="text" class="form-control" placeholder="Логин" name="name">
             <input type="submit" value="Дать доступ" class="btn btn-outline-success" style="margin-left:10px">
         </form>

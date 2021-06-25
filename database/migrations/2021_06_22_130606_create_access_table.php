@@ -15,8 +15,8 @@ class CreateAccessTable extends Migration
     {
         Schema::create('access', function (Blueprint $table) {
             $table->id();
+            $table->biginteger('library_id');
             $table->biginteger('user_id');
-            $table->biginteger('book_id');
             $table->timestamps();
         });
     }

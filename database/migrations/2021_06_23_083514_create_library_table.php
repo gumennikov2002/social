@@ -13,7 +13,7 @@ class CreateLibraryTable extends Migration
      */
     public function up()
     {
-        Schema::create('library', function (Blueprint $table) {
+        Schema::create('libraries', function (Blueprint $table) {
             $table->id();
             $table->biginteger('owner_id');
             $table->timestamps();

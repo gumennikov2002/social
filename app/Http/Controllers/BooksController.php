@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\models\User;
 use App\models\Books;
+use App\models\Library;
+use App\models\Access;
 
 class BooksController extends Controller
 {
@@ -13,13 +15,49 @@ class BooksController extends Controller
     {
         $uid = session('LoggedUser');
         $mybooks = DB::table('books')->join('users', 'author_id', '=', 'users.id')->select('books.*', 'users.name')->where('author_id', '=', $uid)->get();
+        $library = DB::table('libraries')->where('owner_id', '=', $uid)->count();
+        if($library > 0)
+        {
+            $library = DB::table('libraries')->where('owner_id', '=', $uid)->get();
+            $library = DB::table('libraries')->where('owner_id', '=', $uid)->get();
+            $accesses = DB::table('accesses')
+            ->join('users', 'accesses.user_id', '=', 'users.id')
+            ->join('libraries', 'accesses.library_id', '=', 'libraries.id')
+            ->select('accesses.*',  'users.name', 'libraries.owner_id')
+            ->where('owner_id', '=', $uid)
+            ->get();
 
-        $data = [
-            'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first(),
-            'mybooks' => $mybooks
-        ];
-        return view('library', $data);
-        // dd($mybooks);
+            $olib = DB::table('accesses')
+            ->crossJoin('libraries')
+            ->select('accesses.library_id', 'accesses.user_id', 'libraries.owner_id')
+            ->where('accesses.user_id', '=', $uid)
+            ->get();
+
+            $obook = DB::table('books')
+            ->join('users', 'author_id', '=', 'users.id')
+            ->select('books.*', 'users.name')
+            ->where('author_id', '=', $olib[0]->owner_id)
+            // ->whereIn('author_id', $impl)
+            ->get();
+    
+            $data = [
+                'LoggedUserInfo'=>User::where('id', '=', session('LoggedUser'))->first(),
+                'mybooks' => $mybooks,
+                'library' => $library[0],
+                'access' => $accesses,
+                'othlib' => $obook
+            ];
+            return view('library', $data);
+        }
+        else
+        {
+            $library = new Library();
+            $library->owner_id = $uid;
+            $library->save();
+            return redirect('/library');
+        
+            $library = DB::table('libraries')->where('owner_id', '=', $uid)->count();
+        }
     }
 
     function addbook(Request $request)
@@ -40,7 +78,21 @@ class BooksController extends Controller
 
         if($save)
         {
-            return back()->with('success', "Книга успешно добавлена");
+            $uid = session('LoggedUser');
+            $lib = Library::where('owner_id', '=', $uid)->count();
+
+            if($lib > 0)
+            {
+                return back()->with('success', "Книга успешно добавлена");
+            }
+            else
+            {
+                $library = new Library();
+                $library->owner_id = $uid;
+                $library->save();
+                return back()->with('success', "Книга успешно добавлена");
+            }
+
         }
         else
         {

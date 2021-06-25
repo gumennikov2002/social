@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\AccessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::group(['middleware'=>['AuthCheck']], function()
     Route::get('/library/editbook/{id}', [BooksController::class, 'editbook'])->name('editbook');
     Route::post('/library/updatebook/{id}', [BooksController::class, 'updatebook'])->name('updatebook');
     Route::get('/library/read/{id}', [BooksController::class, 'read'])->name('read');
+    Route::post('/library/giveaccess/{id}', [AccessController::class, 'giveaccess'])->name('giveaccess');
+    Route::get('/library/removeaccess/{id}', [AccessController::class, 'removeaccess'])->name('removeaccess');
     // Route::get('/profile', [PostController::class, 'profile'])->name('loadposts');
     Route::get('/auth', [MainController::class, 'login'])->name('login');
     Route::get('/auth', [MainController::class, 'reg'])->name('reg');
